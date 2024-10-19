@@ -57,12 +57,14 @@ class UsersWithIsolatedSingleton {
   }
 }
 
-// Function that runs in the isolate
+// The isolateEntryPoint function creates a singleton within the isolate and listens
+// for messages from the main isolate.
 void isolateEntryPoint(SendPort mainSendPort) {
   // Creating the singleton instance in the isolate
   UsersWithIsolatedSingleton user = UsersWithIsolatedSingleton.instance;
 
-  // Create a ReceivePort to get messages from the main isolate
+  // The ReceivePort listens for messages from the main isolate,
+  // and a SendPort is used to send messages back to the main isolate.
   ReceivePort isolateReceivePort = ReceivePort();
 
   // Send the port to the main isolate so it can communicate
